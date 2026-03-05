@@ -1,231 +1,206 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>themeX Omni Pro</title>
+    <title>Tema infinix tecno itel</title>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --bg: #000000;
-            --card: #111111;
+            --card: rgba(255, 255, 255, 0.08); 
             --accent: #ffffff;
             --text: #ffffff;
-            --text-dim: #888888;
-            --border: rgba(255, 255, 255, 0.1);
-            --radius-lg: 28px;
-            --radius-md: 18px;
-            --glass: rgba(0, 0, 0, 0.95);
-            --heart: #ff4757;
+            --text-dim: #a1a1a6;
+            --glass-border: linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.3) 100%);
+            --ios-blur: blur(30px) saturate(210%);
+            --ios-bezier: cubic-bezier(0.25, 1, 0.5, 1);
+            --heart: #ff3b30;
         }
 
         [data-theme="light"] {
-            --bg: #ffffff;
-            --card: #f2f2f7;
+            --bg: #f2f2f7;
+            --card: rgba(0, 0, 0, 0.05);
             --accent: #000000;
             --text: #000000;
             --text-dim: #636366;
-            --border: rgba(0, 0, 0, 0.05);
-            --glass: rgba(255, 255, 255, 0.95);
+            --glass-border: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.1) 100%);
         }
 
         * { 
             margin: 0; padding: 0; box-sizing: border-box; 
             -webkit-tap-highlight-color: transparent; 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; 
         }
 
         body { 
             background: var(--bg); color: var(--text); 
-            transition: background 0.4s; min-height: 100vh;
-            overflow-x: hidden;
+            transition: background 0.5s var(--ios-bezier); 
+            min-height: 100vh; overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .view { display: none; padding-bottom: 120px; animation: fadeIn 0.4s cubic-bezier(0.2, 0, 0, 1); }
-        .view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .view { display: none; padding-bottom: 100px; }
+        .view.active { display: block; animation: viewEnter 0.5s var(--ios-bezier); }
+        @keyframes viewEnter { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        .container { width: 100%; max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .container { width: 100%; max-width: 500px; margin: 0 auto; padding: 0 16px; }
 
-        header { padding: 40px 0 20px; }
-        .brand-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
-        .brand-row h1 { font-size: 32px; font-weight: 900; letter-spacing: -1.5px; }
+        /* HEADER */
+        header { padding: 12px 0 10px; }
+        .brand-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+        .brand-row h1 { font-size: 26px; font-weight: 800; letter-spacing: -1px; }
         
+        /* SEARCH BAR CRYSTAL */
         .search-bar { 
-            position: relative; background: var(--card); 
-            border-radius: var(--radius-md); border: 1px solid var(--border);
-            display: flex; align-items: center; padding: 0 16px;
+            background: var(--card); border-radius: 16px; 
+            position: relative; display: flex; align-items: center; padding: 0 14px;
+            backdrop-filter: var(--ios-blur); -webkit-backdrop-filter: var(--ios-blur);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
         }
-        .search-bar i { color: var(--text-dim); width: 18px; }
+        .search-bar::before {
+            content: ""; position: absolute; inset: 0; padding: 1px;
+            background: var(--glass-border);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude; pointer-events: none; border-radius: 16px;
+        }
         .search-bar input { 
             flex: 1; border: none; background: transparent; 
-            padding: 16px 10px; color: var(--text); font-size: 16px; outline: none;
+            padding: 12px 10px; color: var(--text); font-size: 16px; outline: none;
         }
 
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 10px; }
-        .card { cursor: pointer; transition: 0.2s; width: 100%; }
+        /* GRID THEME */
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 10px; }
+        .card { cursor: pointer; transition: 0.3s var(--ios-bezier); width: 100%; }
         .card-img { 
-            width: 100%;
-            aspect-ratio: 0.75; 
-            border-radius: var(--radius-lg); 
-            overflow: hidden; background: var(--card); border: 1px solid var(--border);
-            margin-bottom: 10px; position: relative;
+            width: 100%; aspect-ratio: 0.8; 
+            border-radius: 24px; overflow: hidden; 
+            background: var(--card); position: relative;
+            margin-bottom: 8px;
         }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .card:active { transform: scale(0.96); }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; }
+        .card-img::after {
+            content: ""; position: absolute; inset: 0; padding: 1.5px;
+            background: var(--glass-border);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude; border-radius: 24px; pointer-events: none;
+        }
+        .card:active { transform: scale(0.94); }
 
+        /* LIQUID GLASS DOCK - FIX KLIK */
         .dock-wrap { 
-            position: fixed; bottom: 30px; left: 0; right: 0; 
-            display: flex; justify-content: center; z-index: 1000; 
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: fixed; bottom: 25px; left: 0; right: 0; 
+            display: flex; justify-content: center; 
+            z-index: 9999; /* Sangat tinggi agar tidak tertutup */
+            pointer-events: none; /* Supaya area luar dock tembus klik */
         }
-        .dock-wrap.hide { transform: translateY(150px); pointer-events: none; } 
         .dock { 
-            background: var(--glass); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            padding: 8px; border-radius: 40px; display: flex; gap: 8px; border: 1px solid var(--border);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            background: rgba(25, 25, 25, 0.4); 
+            backdrop-filter: var(--ios-blur); -webkit-backdrop-filter: var(--ios-blur);
+            padding: 6px; border-radius: 32px; display: flex; gap: 6px; 
+            position: relative; pointer-events: auto; /* Aktifkan klik hanya di dock */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.2);
+        }
+        .dock::before {
+            content: ""; position: absolute; inset: 0; padding: 1px;
+            background: var(--glass-border);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude; border-radius: 32px;
         }
         .dock-item { 
-            width: 54px; height: 54px; border-radius: 27px; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            color: var(--text-dim); cursor: pointer; transition: 0.4s cubic-bezier(0.3, 0, 0, 1.2);
+            width: 48px; height: 48px; border-radius: 24px; 
+            display: flex; align-items: center; justify-content: center; 
+            color: var(--text-dim); transition: 0.4s var(--ios-bezier);
+            cursor: pointer; position: relative; z-index: 2;
         }
-        .dock-item.active { background: var(--accent); color: var(--bg); width: 120px; }
-        .dock-item span { font-size: 11px; font-weight: 800; margin-top: 2px; display: none; }
+        .dock-item.active { background: var(--accent); color: var(--bg); width: 110px; }
+        .dock-item span { font-size: 13px; font-weight: 700; margin-left: 8px; display: none; }
         .dock-item.active span { display: block; }
 
+        /* DETAIL PANEL */
         .panel { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg); z-index: 2000; 
-            transform: translateY(100%); 
-            transition: 0.6s cubic-bezier(0.32, 0.72, 0, 1); 
-            overflow-y: auto; padding-bottom: 140px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 5000; 
+            transform: translateY(100%); transition: 0.5s var(--ios-bezier); overflow-y: auto; padding-bottom: 140px;
         }
         .panel.active { transform: translateY(0); }
-        
-        .panel-nav { 
-            position: sticky; top: 0; padding: 20px 24px; 
-            display: flex; justify-content: space-between; align-items: center;
-            background: var(--bg); z-index: 10; 
-        }
+        .panel-nav { position: sticky; top: 0; padding: 16px; display: flex; justify-content: space-between; background: var(--bg); z-index: 6000; }
 
-        .gallery-container { width: 100%; overflow: hidden; margin-bottom: 25px; }
-        .gallery { display: flex; gap: 14px; padding: 0 24px; overflow-x: auto; scrollbar-width: none; }
-        .gallery::-webkit-scrollbar { display: none; }
-        .gallery-item { min-width: 260px; height: 460px; border-radius: 32px; overflow: hidden; border: 1px solid var(--border); }
+        .gallery { display: flex; gap: 12px; overflow-x: auto; scrollbar-width: none; padding: 0 16px; margin-bottom: 20px; scroll-snap-type: x mandatory; }
+        .gallery-item { min-width: 280px; height: 480px; border-radius: 28px; overflow: hidden; position: relative; scroll-snap-align: center; background: var(--card); }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-item::after { content: ""; position: absolute; inset: 0; padding: 1.5px; background: var(--glass-border); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude; border-radius: 28px; }
 
-        .meta-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-        .info-main { flex: 1; padding-right: 20px; }
-        .info-main h2 { font-size: 30px; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 8px; color: var(--text); }
-        .author-tag { display: inline-flex; align-items: center; gap: 8px; color: var(--text-dim); font-weight: 700; font-size: 14px; }
-        
-        .stats-row { display: flex; gap: 10px; margin-bottom: 25px; }
-        .stat-pill { 
-            background: var(--card); border: 1px solid var(--border); 
-            padding: 10px 16px; border-radius: 20px; display: flex; align-items: center; gap: 8px;
-            font-weight: 700; font-size: 13px; color: var(--text);
-        }
+        /* BUTTONS */
+        .btn-round { width: 44px; height: 44px; border-radius: 22px; background: var(--card); color: var(--text); border: none; display: flex; align-items: center; justify-content: center; backdrop-filter: var(--ios-blur); cursor: pointer; position: relative; }
+        .btn-round::after { content: ""; position: absolute; inset: 0; padding: 1px; background: var(--glass-border); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude; border-radius: 22px; }
 
-        .description-box { 
-            line-height: 1.6; color: var(--text-dim); font-size: 15px; 
-            margin-bottom: 40px; border-top: 1px solid var(--border); padding-top: 20px; 
-        }
-
-        .btn-round { width: 50px; height: 50px; border-radius: 50%; border: 1px solid var(--border); background: var(--card); color: var(--text); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; }
-        .btn-round:active { transform: scale(0.9); }
-
+        /* APPLY BAR */
         .apply-bar { 
             position: fixed; bottom: 0; left: 0; right: 0; 
-            padding: 20px 24px calc(24px + env(safe-area-inset-bottom, 15px)); 
-            background: var(--glass); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px);
-            border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px;
-            z-index: 10001; visibility: hidden; opacity: 0; transition: opacity 0.3s;
+            padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 10px)); 
+            background: var(--card); backdrop-filter: var(--ios-blur); -webkit-backdrop-filter: var(--ios-blur);
+            display: flex; flex-direction: column; gap: 12px;
+            z-index: 7000; transform: translateY(100%); transition: 0.4s var(--ios-bezier);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.4);
         }
-        .panel.active ~ .apply-bar { visibility: visible; opacity: 1; }
+        .panel.active ~ .apply-bar { transform: translateY(0); }
+        .btn-apply { width: 100%; height: 54px; border-radius: 27px; background: var(--accent); color: var(--bg); border: none; font-weight: 800; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; }
 
-        .btn-tutorial {
-            width: 100%; height: 50px; border-radius: 25px;
-            background: transparent; color: var(--text); border: 1px solid var(--border);
-            font-weight: 700; font-size: 14px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-        }
+        #toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--bg); padding: 10px 20px; border-radius: 25px; font-size: 13px; font-weight: 700; z-index: 10000; opacity: 0; transition: 0.4s; pointer-events: none; }
+        #toast.active { opacity: 1; top: 50px; }
 
-        .btn-apply { 
-            flex: 1; height: 64px; border-radius: 32px; 
-            background: var(--accent); color: var(--bg); border: none; 
-            font-weight: 900; font-size: 18px; cursor: pointer; 
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
-        }
-        .btn-apply:active { transform: scale(0.95); opacity: 0.8; }
-
-        #toast { 
-            position: fixed; top: 40px; left: 50%; transform: translateX(-50%); 
-            background: var(--accent); color: var(--bg); padding: 12px 24px; 
-            border-radius: 30px; font-size: 14px; font-weight: 800; z-index: 11000; 
-            opacity: 0; transition: 0.4s; pointer-events: none; 
-        }
-        #toast.active { opacity: 1; top: 60px; }
-
-        .settings-list { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; }
-        .setting-item { background: var(--card); padding: 20px; border-radius: 22px; display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--border); }
+        .stat-pill { background: var(--card); backdrop-filter: var(--ios-blur); padding: 8px 16px; border-radius: 14px; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 13px; position: relative; }
+        .stat-pill::after { content: ""; position: absolute; inset: 0; padding: 1px; background: var(--glass-border); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude; border-radius: 14px; }
     </style>
 </head>
 <body data-theme="dark">
 
-    <div id="toast">Notification</div>
+    <div id="toast">Notifikasi</div>
 
-    <!-- HOME -->
+    <!-- HOME VIEW -->
     <div id="view-home" class="view active">
         <div class="container">
             <header>
                 <div class="brand-row">
                     <h1>theme<span>X</span></h1>
-                    <button class="btn-round" onclick="toggleTheme()" id="themeSwitcher"><i data-lucide="moon"></i></button>
+                    <button class="btn-round" onclick="toggleTheme()"><i data-lucide="moon"></i></button>
                 </div>
                 <div class="search-bar">
-                    <i data-lucide="search"></i>
-                    <input type="text" id="searchInput" placeholder="Search themes..." oninput="doSearch()">
+                    <i data-lucide="search" style="color: var(--text-dim)"></i>
+                    <input type="text" id="searchInput" placeholder="Cari tema premium..." oninput="doSearch()">
                 </div>
             </header>
             <div class="grid" id="mainGrid"></div>
         </div>
     </div>
 
-    <!-- BROWSE -->
+    <!-- BROWSE VIEW -->
     <div id="view-browse" class="view">
-        <div class="container"><header><h1>New Themes</h1></header><div class="grid" id="browseGrid"></div></div>
+        <div class="container"><header><h1>Jelajahi</h1></header><div class="grid" id="browseGrid"></div></div>
     </div>
 
-    <!-- FAVORITE -->
+    <!-- FAV VIEW -->
     <div id="view-fav" class="view">
-        <div class="container"><header><h1>My Favorites</h1></header><div id="favGrid" class="grid"></div></div>
+        <div class="container"><header><h1>Favorit</h1></header><div id="favGrid" class="grid"></div></div>
     </div>
 
-    <!-- SETTINGS -->
+    <!-- SETTINGS VIEW -->
     <div id="view-settings" class="view">
-        <div class="container"><header><h1>Settings</h1></header>
-            <div class="settings-list">
-                <div class="setting-item" onclick="window.open('https://whatsapp.com/channel/0029VbB8MZt8V0ttSDmHn22j', '_blank')" style="background: #25D366; color: white; border: none;">
-                    <div style="display: flex; align-items: center; gap: 14px; font-weight: 800;"><i data-lucide="message-circle"></i> Join WhatsApp Channel</div>
-                    <i data-lucide="chevron-right"></i>
-                </div>
-                <div class="setting-item" onclick="toggleTheme()">
-                    <div style="display: flex; align-items: center; gap: 14px; font-weight: 800;"><i data-lucide="palette"></i> Toggle Theme Mode</div>
-                    <i data-lucide="chevron-right"></i>
-                </div>
+        <div class="container"><header><h1>Menu</h1></header>
+            <div class="stat-pill" style="justify-content: space-between; padding: 20px; margin-bottom: 12px;" onclick="window.open('https://whatsapp.com/channel/0029VbB8MZt8V0ttSDmHn22j', '_blank')">
+                <div style="display: flex; align-items: center; gap: 12px;"><i data-lucide="message-circle" style="color:#25D366"></i> Saluran WhatsApp</div>
+                <i data-lucide="chevron-right"></i>
             </div>
         </div>
     </div>
 
-    <!-- DOCK NAV -->
+    <!-- BOTTOM DOCK - FIX NAVIGASI -->
     <div class="dock-wrap" id="mainDock">
         <div class="dock">
-            <div class="dock-item active" onclick="switchView('home', this)"><i data-lucide="home"></i><span>Home</span></div>
-            <div class="dock-item" onclick="switchView('browse', this)"><i data-lucide="layout-grid"></i><span>Explore</span></div>
-            <div class="dock-item" onclick="switchView('fav', this)"><i data-lucide="heart"></i><span>Favs</span></div>
-            <div class="dock-item" onclick="switchView('settings', this)"><i data-lucide="user-cog"></i><span>Profile</span></div>
+            <div class="dock-item active" onclick="switchView('home', this)"><i data-lucide="home"></i><span>Beranda</span></div>
+            <div class="dock-item" onclick="switchView('browse', this)"><i data-lucide="compass"></i><span>Jelajah</span></div>
+            <div class="dock-item" onclick="switchView('fav', this)"><i data-lucide="heart"></i><span>Favorit</span></div>
+            <div class="dock-item" onclick="switchView('settings', this)"><i data-lucide="menu"></i><span>Menu</span></div>
         </div>
     </div>
 
@@ -235,41 +210,27 @@
             <button class="btn-round" onclick="closeDetail()"><i data-lucide="chevron-down"></i></button>
             <button class="btn-round" onclick="copyShareLink()"><i data-lucide="share-2"></i></button>
         </div>
-
-        <div class="gallery-container">
-            <div class="gallery" id="detGallery"></div>
-        </div>
-
+        <div class="gallery" id="detGallery"></div>
         <div class="container">
-            <div class="meta-header">
-                <div class="info-main">
-                    <h2 id="detTitle">Theme Name</h2>
-                    <div class="author-tag"><i data-lucide="user" style="width: 14px;"></i> <span id="detAuthor">Designer</span></div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div>
+                    <h2 id="detTitle" style="font-size: 28px; font-weight: 800;">Nama Tema</h2>
+                    <p id="detAuthor" style="color: var(--text-dim); font-weight: 600;">@kreator</p>
                 </div>
                 <button id="detLikeBtn" class="btn-round"><i data-lucide="heart"></i></button>
             </div>
-
-            <div class="stats-row">
-                <div class="stat-pill"><i data-lucide="thumbs-up" style="width:14px; color: #ffcc00;"></i> <span id="detLikeCount">0</span></div>
-                <div class="stat-pill"><i data-lucide="file-down" style="width:14px; color: #2ecc71;"></i> <span id="detSize">8.5 MB</span></div>
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <div class="stat-pill"><i data-lucide="thumbs-up" style="width:14px; color:#ffcc00"></i> <span id="detLikeCount">0</span></div>
+                <div class="stat-pill"><i data-lucide="box" style="width:14px; color:#34c759"></i> <span id="detSize">4.0 MB</span></div>
             </div>
-
-            <div class="description-box" id="detDesc">
-                This theme features high-quality assets, custom icons, and HD wallpapers. Designed with a minimalist yet elegant approach to elevate your device's interface.
-            </div>
+            <p id="detDesc" style="line-height: 1.6; color: var(--text-dim); font-size: 15px;"></p>
         </div>
     </div>
 
-    <!-- BOTTOM APPLY BAR -->
+    <!-- APPLY ACTION BAR -->
     <div class="apply-bar" id="bottomApplyBar">
-        <button class="btn-tutorial" onclick="window.open('https://vt.tiktok.com/ZSmoDshWL/', '_blank')">
-            <i data-lucide="play-circle"></i>
-            How to Download? (Tutorial)
-        </button>
-        <button class="btn-apply" id="installBtn">
-            <i data-lucide="download"></i>
-            DOWNLOAD THEME NOW
-        </button>
+        <button class="btn-tutorial" style="background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--text); padding: 10px; border-radius: 12px; font-weight: 700;" onclick="window.open('https://vt.tiktok.com/ZSmoDshWL/', '_blank')">Tutorial Pemasangan</button>
+        <button class="btn-apply" id="installBtn"><i data-lucide="download"></i> UNDUH TEMA</button>
     </div>
 
     <script type="module">
@@ -288,33 +249,24 @@
         onValue(ref(db, 'apps/'), (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                allData = Object.keys(data)
-                    .filter(key => !data[key].is_apk)
-                    .map(key => ({ 
-                        id: key, 
-                        ...data[key],
-                        likes: data[key].likes || 0,
-                        fileSize: data[key].size || "10.2 MB"
-                    }));
-                
-                const activeView = document.querySelector('.view.active').id;
-                if(activeView === 'view-home') renderItems(allData, 'mainGrid');
-                if(activeView === 'view-browse') renderItems([...allData].reverse(), 'browseGrid');
-                if(activeView === 'view-fav') renderItems(allData.filter(i => favorites.includes(i.id)), 'favGrid');
-                
-                // Update detail if open
-                if(currentItem) {
-                    const fresh = allData.find(i => i.id === currentItem.id);
-                    if(fresh) document.getElementById('detLikeCount').innerText = fresh.likes;
-                }
+                allData = Object.keys(data).filter(key => !data[key].is_apk).map(key => ({ 
+                    id: key, ...data[key], likes: data[key].likes || 0
+                }));
+                refreshView();
             }
         });
+
+        function refreshView() {
+            const activeView = document.querySelector('.view.active').id;
+            if(activeView === 'view-home') renderItems(allData, 'mainGrid');
+            if(activeView === 'view-browse') renderItems([...allData].reverse(), 'browseGrid');
+            if(activeView === 'view-fav') renderItems(allData.filter(i => favorites.includes(i.id)), 'favGrid');
+        }
 
         function renderItems(items, gridId) {
             const grid = document.getElementById(gridId);
             if (!grid) return;
-            grid.innerHTML = items.length ? '' : '<p style="grid-column: 1/-1; text-align:center; padding: 40px; opacity: 0.4;">No themes found.</p>';
-            
+            grid.innerHTML = items.length ? '' : '<p style="grid-column: 1/-1; text-align:center; padding: 50px; opacity: 0.4;">Kosong.</p>';
             items.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'card';
@@ -322,7 +274,7 @@
                 div.innerHTML = `
                     <div class="card-img"><img src="${item.images ? item.images[0] : ''}" loading="lazy"></div>
                     <div style="padding: 0 4px;">
-                        <p style="font-size: 14px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name}</p>
+                        <p style="font-size: 14px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name}</p>
                         <p style="font-size: 11px; color: var(--text-dim); font-weight: 600;">${item.dev || 'themeX'}</p>
                     </div>
                 `;
@@ -336,21 +288,17 @@
             document.querySelectorAll('.dock-item').forEach(d => d.classList.remove('active'));
             document.getElementById(`view-${viewName}`).classList.add('active');
             el.classList.add('active');
-            
-            if (viewName === 'home') renderItems(allData, 'mainGrid');
-            if (viewName === 'browse') renderItems([...allData].reverse(), 'browseGrid');
-            if (viewName === 'fav') renderItems(allData.filter(i => favorites.includes(i.id)), 'favGrid');
-            
+            refreshView();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
         window.openDetail = (item) => {
             currentItem = item;
-            document.getElementById('mainDock').classList.add('hide'); 
             document.getElementById('detTitle').innerText = item.name;
-            document.getElementById('detAuthor').innerText = item.dev || 'Core Designer';
-            document.getElementById('detSize').innerText = item.fileSize;
+            document.getElementById('detAuthor').innerText = item.dev || 'Verified Creator';
             document.getElementById('detLikeCount').innerText = item.likes;
+            document.getElementById('detSize').innerText = item.size || '3.8 MB';
+            document.getElementById('detDesc').innerText = item.desc || "Nikmati visual premium dengan tema eksklusif ini.";
             
             const gallery = document.getElementById('detGallery');
             gallery.innerHTML = '';
@@ -358,61 +306,36 @@
                 gallery.innerHTML += `<div class="gallery-item"><img src="${img}"></div>`;
             });
 
-            const likeBtn = document.getElementById('detLikeBtn');
-            if (likedItems.includes(item.id)) {
-                likeBtn.style.color = 'var(--heart)';
-                likeBtn.onclick = () => showToast("Already liked!");
-            } else {
-                likeBtn.style.color = 'var(--text)';
-                likeBtn.onclick = () => handleLike(item.id);
-            }
+            document.getElementById('detLikeBtn').style.color = likedItems.includes(item.id) ? 'var(--heart)' : 'var(--text)';
+            document.getElementById('detLikeBtn').onclick = () => handleLike(item.id);
 
             document.getElementById('installBtn').onclick = () => {
-                showToast("Opening download link...");
-                setTimeout(() => window.open(item.link, '_blank'), 500);
+                showToast("Menyiapkan unduhan...");
+                setTimeout(() => window.open(item.link, '_blank'), 800);
             };
 
             document.getElementById('detailPanel').classList.add('active');
-            document.getElementById('detailPanel').scrollTo(0,0);
+            document.getElementById('mainDock').style.opacity = '0';
+            document.getElementById('mainDock').style.pointerEvents = 'none';
+        };
+
+        window.closeDetail = () => {
+            document.getElementById('detailPanel').classList.remove('active');
+            document.getElementById('mainDock').style.opacity = '1';
+            document.getElementById('mainDock').style.pointerEvents = 'auto';
         };
 
         function handleLike(id) {
             if (likedItems.includes(id)) return;
-            
-            const likeRef = ref(db, `apps/${id}/likes`);
-            runTransaction(likeRef, (currentLikes) => {
-                return (currentLikes || 0) + 1;
-            }).then(() => {
+            runTransaction(ref(db, `apps/${id}/likes`), (c) => (c || 0) + 1).then(() => {
                 likedItems.push(id);
+                if(!favorites.includes(id)) favorites.push(id);
                 localStorage.setItem('themeX_liked', JSON.stringify(likedItems));
+                localStorage.setItem('themeX_favs', JSON.stringify(favorites));
                 document.getElementById('detLikeBtn').style.color = 'var(--heart)';
-                showToast("Theme Liked!");
-            }).catch(() => {
-                showToast("Failed to like. Try again.");
+                showToast("Berhasil disukai!");
             });
         }
-
-        window.closeDetail = () => {
-            currentItem = null;
-            document.getElementById('detailPanel').classList.remove('active');
-            document.getElementById('mainDock').classList.remove('hide'); 
-        };
-
-        window.copyShareLink = () => {
-            const el = document.createElement('textarea');
-            el.value = window.location.href;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-            showToast("Share link copied!");
-        };
-
-        window.doSearch = () => {
-            const term = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = allData.filter(i => i.name.toLowerCase().includes(term));
-            renderItems(filtered, 'mainGrid');
-        };
 
         window.toggleTheme = () => {
             const isDark = document.body.getAttribute('data-theme') === 'dark';
@@ -424,6 +347,11 @@
             const t = document.getElementById('toast');
             t.innerText = msg; t.classList.add('active');
             setTimeout(() => t.classList.remove('active'), 2000);
+        };
+
+        window.doSearch = () => {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            renderItems(allData.filter(i => i.name.toLowerCase().includes(term)), 'mainGrid');
         };
 
         lucide.createIcons();
