@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Tema Transsion store</title>
+
+    <link rel="icon" href="https://i.ibb.co/nhzx0CS/20260105-114157.png" type="image/png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/nhzx0CS/20260105-114157.png">
+    <meta property="og:image" content="https://i.ibb.co/nhzx0CS/20260105-114157.png">
+    <meta name="twitter:image" content="https://i.ibb.co/nhzx0CS/20260105-114157.png">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
@@ -110,9 +115,8 @@
             display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; 
             padding: 10px 20px; margin-bottom: 10px; scroll-snap-type: x mandatory; 
         }
-        .gallery::-webkit-scrollbar { display: none; }
         .gallery-item { 
-            min-width: 85%; height: 420px; /* Reduced height to prevent cropping */
+            min-width: 85%; height: 420px; 
             display: flex; justify-content: center; align-items: center;
             scroll-snap-align: center; background: transparent; 
             border-radius: 24px; overflow: hidden;
@@ -166,7 +170,6 @@
 
     <div id="toast">Notifikasi</div>
 
-    <!-- HOME -->
     <div id="view-home" class="view active">
         <div class="container">
             <header>
@@ -183,17 +186,14 @@
         </div>
     </div>
 
-    <!-- BROWSE -->
     <div id="view-browse" class="view">
         <div class="container"><header><h1>Jelajahi</h1></header><div class="grid" id="browseGrid"></div></div>
     </div>
 
-    <!-- FAVORITES -->
     <div id="view-fav" class="view">
         <div class="container"><header><h1>Favorit</h1></header><div id="favGrid" class="grid"></div></div>
     </div>
 
-    <!-- MENU -->
     <div id="view-settings" class="view">
         <div class="container"><header><h1>Menu</h1></header>
             <div class="stat-pill" style="justify-content: space-between; padding: 22px; margin-bottom: 12px; cursor:pointer; border-radius: 20px;" onclick="window.open('https://whatsapp.com/channel/0029VbB8MZt8V0ttSDmHn22j', '_blank')">
@@ -203,7 +203,6 @@
         </div>
     </div>
 
-    <!-- DOCK NAVIGATION -->
     <div class="dock-wrap" id="mainDock">
         <div class="dock">
             <div class="dock-item active" onclick="switchView('home', this)"><i data-lucide="home"></i><span>Beranda</span></div>
@@ -213,14 +212,12 @@
         </div>
     </div>
 
-    <!-- DETAIL PANEL -->
     <div id="detailPanel" class="panel">
         <div class="panel-nav">
             <button class="btn-round" onclick="closeDetail()"><i data-lucide="chevron-down"></i></button>
             <button class="btn-round" onclick="copyShareLink()"><i data-lucide="share-2"></i></button>
         </div>
         
-        <!-- Gallery dikecilkan agar terlihat utuh -->
         <div class="gallery" id="detGallery"></div>
         
         <div class="container">
@@ -243,7 +240,6 @@
         </div>
     </div>
 
-    <!-- APPLY BAR - LEBIH KECIL & RAPI -->
     <div class="apply-bar" id="bottomApplyBar">
         <button class="btn-tutorial" onclick="window.open('https://vt.tiktok.com/ZSmoDshWL/', '_blank')">
             <i data-lucide="play" style="margin-right: 6px; width: 14px; fill: currentColor;"></i> Tutorial Pemasangan
@@ -386,4 +382,3 @@
     </script>
 </body>
 </html>
-
