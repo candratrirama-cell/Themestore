@@ -5,17 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Tema Transsion store</title>
 
-    <!-- Favicon dan meta tag untuk sosial media -->
     <link rel="icon" href="https://i.ibb.co/nhzx0CS/20260105-114157.png" type="image/png">
     <link rel="apple-touch-icon" href="https://i.ibb.co/nhzx0CS/20260105-114157.png">
     <meta property="og:image" content="https://i.ibb.co/nhzx0CS/20260105-114157.png">
     <meta name="twitter:image" content="https://i.ibb.co/nhzx0CS/20260105-114157.png">
     
-    <!-- Library icon lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        /* Root variable untuk mode gelap (default) */
         :root {
             --bg: #000000;
             --card: rgba(255, 255, 255, 0.08); 
@@ -28,7 +25,6 @@
             --heart: #ff3b30;
         }
 
-        /* Root variable untuk mode terang */
         [data-theme="light"] {
             --bg: #f2f2f7;
             --card: rgba(0, 0, 0, 0.05);
@@ -38,7 +34,6 @@
             --glass-border: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.02) 50%, rgba(0,0,0,0.1) 100%);
         }
 
-        /* Reset style dasar */
         * { 
             margin: 0; padding: 0; box-sizing: border-box; 
             -webkit-tap-highlight-color: transparent; 
@@ -52,14 +47,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Style untuk tampilan view (halaman) */
         .view { display: none; padding-bottom: 120px; }
         .view.active { display: block; animation: viewEnter 0.5s var(--ios-bezier); }
         @keyframes viewEnter { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         .container { width: 100%; max-width: 500px; margin: 0 auto; padding: 0 16px; }
 
-        /* Header dan search bar */
         header { padding: 15px 0 10px; }
         .brand-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .brand-row h1 { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
@@ -77,7 +70,6 @@
         }
         .search-bar input { flex: 1; border: none; background: transparent; padding: 14px 10px; color: var(--text); font-size: 16px; outline: none; }
 
-        /* Grid untuk daftar tema */
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 15px; }
         .card { cursor: pointer; transition: 0.3s var(--ios-bezier); width: 100%; }
         .card-img { 
@@ -88,7 +80,6 @@
         }
         .card-img img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Dock navigasi bawah (iOS style) */
         .dock-wrap { position: fixed; bottom: 25px; left: 0; right: 0; display: flex; justify-content: center; z-index: 8000; pointer-events: none; transition: transform 0.4s var(--ios-bezier); }
         .dock { 
             background: rgba(20, 20, 20, 0.7); 
@@ -102,7 +93,6 @@
         .dock-item span { font-size: 14px; font-weight: 700; margin-left: 8px; display: none; }
         .dock-item.active span { display: block; }
 
-        /* Panel detail tema (slide up) */
         .panel { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); 
             z-index: 9000; transform: translateY(100%); transition: 0.5s var(--ios-bezier); 
@@ -117,7 +107,6 @@
             z-index: 9999; 
         }
 
-        /* Galeri gambar di detail tema */
         .gallery { 
             display: flex; gap: 10px; overflow-x: auto; scrollbar-width: none; 
             padding: 10px 20px; margin-bottom: 10px; scroll-snap-type: x mandatory; 
@@ -136,11 +125,9 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* Tombol bulat dengan efek glass */
         .btn-round { width: 44px; height: 44px; border-radius: 22px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); color: var(--text); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; position: relative; }
         .btn-round::after { content: ""; position: absolute; inset: 0; padding: 1px; background: var(--glass-border); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude; border-radius: 22px; pointer-events: none; }
 
-        /* Bar aksi bawah (download & tutorial) */
         .apply-bar { 
             position: fixed; bottom: 0; left: 0; right: 0; 
             padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 10px)); 
@@ -167,27 +154,108 @@
         }
         .btn-apply:active { transform: scale(0.96); }
 
-        /* Statistik pill */
         .stat-pill { background: var(--card); padding: 6px 12px; border-radius: 10px; display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 12px; position: relative; }
         .stat-pill::after { content: ""; position: absolute; inset: 0; padding: 1px; background: var(--glass-border); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask-composite: exclude; border-radius: 10px; pointer-events: none; }
 
-        /* Toast notifikasi */
         #toast { position: fixed; top: 50px; left: 50%; transform: translateX(-50%); background: var(--accent); color: var(--bg); padding: 10px 20px; border-radius: 30px; font-size: 14px; font-weight: 800; z-index: 21000; opacity: 0; transition: 0.4s; pointer-events: none; }
         #toast.active { opacity: 1; top: 60px; }
+
+        /* Style untuk bagian komentar */
+        .comment-section {
+            margin-top: 24px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .comment-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .comment-input-wrap {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .comment-input-wrap input {
+            flex: 1;
+            background: var(--card);
+            border: none;
+            border-radius: 24px;
+            padding: 12px 16px;
+            color: var(--text);
+            font-size: 14px;
+            outline: none;
+        }
+        .comment-input-wrap button {
+            background: var(--accent);
+            color: var(--bg);
+            border: none;
+            border-radius: 24px;
+            padding: 0 18px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+        }
+        .comment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .comment-item {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 12px;
+        }
+        .comment-name {
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+        .comment-name i {
+            width: 14px;
+            color: #34c759;
+        }
+        .comment-text {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+        .comment-date {
+            font-size: 10px;
+            color: var(--text-dim);
+            margin-top: 6px;
+            opacity: 0.6;
+        }
+        .empty-comment {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-dim);
+            font-size: 13px;
+        }
+        .comment-loading {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-dim);
+        }
     </style>
 </head>
 <body data-theme="dark">
 
-    <!-- Elemen notifikasi toast -->
     <div id="toast">Notifikasi</div>
 
-    <!-- Halaman Beranda (Home) -->
     <div id="view-home" class="view active">
         <div class="container">
             <header>
                 <div class="brand-row">
                     <h1>theme<span>X</span></h1>
-                    <!-- Tombol toggle tema gelap/terang -->
                     <button class="btn-round" onclick="toggleTheme()"><i data-lucide="moon"></i></button>
                 </div>
                 <div class="search-bar">
@@ -199,25 +267,20 @@
         </div>
     </div>
 
-    <!-- Halaman Jelajahi (Browse) -->
     <div id="view-browse" class="view">
         <div class="container"><header><h1>Jelajahi</h1></header><div class="grid" id="browseGrid"></div></div>
     </div>
 
-    <!-- Halaman Favorit -->
     <div id="view-fav" class="view">
         <div class="container"><header><h1>Favorit</h1></header><div id="favGrid" class="grid"></div></div>
     </div>
 
-    <!-- Halaman Menu / Settings -->
     <div id="view-settings" class="view">
         <div class="container"><header><h1>Menu</h1></header>
-            <!-- Tombol link ke WhatsApp Channel -->
             <div class="stat-pill" style="justify-content: space-between; padding: 22px; margin-bottom: 12px; cursor:pointer; border-radius: 20px;" onclick="window.open('https://whatsapp.com/channel/0029VbB8MZt8V0ttSDmHn22j', '_blank')">
                 <div style="display: flex; align-items: center; gap: 12px;"><i data-lucide="message-circle" style="color:#25D366"></i> Saluran WhatsApp</div>
                 <i data-lucide="chevron-right"></i>
             </div>
-            <!-- Tombol donasi developer -->
             <div class="stat-pill" style="justify-content: space-between; padding: 22px; margin-bottom: 12px; cursor:pointer; border-radius: 20px;" onclick="window.open('https://saweria.co/ramateam', '_blank')">
                 <div style="display: flex; align-items: center; gap: 12px;"><i data-lucide="heart" style="color:#ff3b30"></i> Donasi Developer</div>
                 <i data-lucide="external-link"></i>
@@ -225,7 +288,6 @@
         </div>
     </div>
 
-    <!-- Dock navigasi bawah -->
     <div class="dock-wrap" id="mainDock">
         <div class="dock">
             <div class="dock-item active" onclick="switchView('home', this)"><i data-lucide="home"></i><span>Beranda</span></div>
@@ -235,14 +297,12 @@
         </div>
     </div>
 
-    <!-- Panel detail tema (muncul dari bawah) -->
     <div id="detailPanel" class="panel">
         <div class="panel-nav">
             <button class="btn-round" onclick="closeDetail()"><i data-lucide="chevron-down"></i></button>
             <button class="btn-round" onclick="copyShareLink()"><i data-lucide="share-2"></i></button>
         </div>
         
-        <!-- Galeri gambar detail -->
         <div class="gallery" id="detGallery"></div>
         
         <div class="container">
@@ -253,7 +313,6 @@
                         <i data-lucide="shield-check" style="width:14px; color:#34c759"></i> <span>GoR 1.1 Creator</span>
                     </p>
                 </div>
-                <!-- Tombol like di detail -->
                 <button id="detLikeBtn" class="btn-round" style="width: 50px; height: 50px; border-radius: 25px;"><i data-lucide="heart"></i></button>
             </div>
             
@@ -263,10 +322,24 @@
             </div>
             
             <p id="detDesc" style="line-height: 1.5; color: var(--text-dim); font-size: 14px; margin-bottom: 30px;"></p>
+
+            <!-- BAGIAN KOMENTAR (PUBLIC - FIREBASE) -->
+            <div class="comment-section" id="commentSection">
+                <div class="comment-title">
+                    <i data-lucide="message-circle" style="width: 18px;"></i>
+                    <span>Komentar Publik</span>
+                </div>
+                <div class="comment-input-wrap">
+                    <input type="text" id="commentInput" placeholder="Tulis komentar Anda...">
+                    <button onclick="postComment()">Kirim</button>
+                </div>
+                <div class="comment-list" id="commentList">
+                    <div class="comment-loading">Memuat komentar...</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Bar aksi bawah untuk unduh dan tutorial -->
     <div class="apply-bar" id="bottomApplyBar">
         <button class="btn-tutorial" onclick="window.open('https://vt.tiktok.com/ZSmoDshWL/', '_blank')">
             <i data-lucide="play" style="margin-right: 6px; width: 14px; fill: currentColor;"></i> Tutorial Pemasangan
@@ -274,36 +347,141 @@
         <button class="btn-apply" id="installBtn"><i data-lucide="download-cloud"></i> UNDUH TEMA</button>
     </div>
 
-    <!-- MODULE: Firebase integration (database realtime) -->
     <script type="module">
-        // Import Firebase modules
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getDatabase, ref, onValue, runTransaction, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
-        // Konfigurasi Firebase (Realtime Database)
+        // Konfigurasi Firebase
         const firebaseConfig = { databaseURL: "https://miningtransaction-default-rtdb.asia-southeast1.firebasedatabase.app" };
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
         
-        // Variabel global untuk menyimpan data
-        let allData = [];                 // Semua tema dari database
-        let favorites = JSON.parse(localStorage.getItem('themeX_favs') || '[]');   // ID favorit
-        let likedItems = JSON.parse(localStorage.getItem('themeX_liked') || '[]'); // ID yang sudah di-like
-        let currentItem = null;          // Tema yang sedang dibuka di detail panel
+        // Variabel global
+        let allData = [];
+        let favorites = JSON.parse(localStorage.getItem('themeX_favs') || '[]');
+        let likedItems = JSON.parse(localStorage.getItem('themeX_liked') || '[]');
+        let currentItem = null;
+        
+        // Variable untuk unsubscribe listener komentar
+        let currentCommentListener = null;
 
-        // Mendengarkan perubahan data dari Firebase Realtime Database
+        // Fungsi untuk memuat komentar dari Firebase berdasarkan ID tema
+        function loadComments(themeId) {
+            // Hentikan listener sebelumnya jika ada
+            if (currentCommentListener) {
+                currentCommentListener();
+                currentCommentListener = null;
+            }
+            
+            const container = document.getElementById('commentList');
+            container.innerHTML = '<div class="comment-loading">Memuat komentar...</div>';
+            
+            // Buat reference ke komentar tema tertentu
+            const commentsRef = ref(db, `comments/${themeId}`);
+            
+            // Pasang listener realtime
+            currentCommentListener = onValue(commentsRef, (snapshot) => {
+                const data = snapshot.val();
+                
+                if (!data) {
+                    container.innerHTML = '<div class="empty-comment">Belum ada komentar. Jadilah yang pertama!</div>';
+                    return;
+                }
+                
+                // Konversi object ke array
+                const commentsArray = Object.entries(data).map(([id, comment]) => ({
+                    id: id,
+                    ...comment
+                })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)); // Urut dari terbaru
+                
+                if (commentsArray.length === 0) {
+                    container.innerHTML = '<div class="empty-comment">Belum ada komentar. Jadilah yang pertama!</div>';
+                    return;
+                }
+                
+                container.innerHTML = commentsArray.map(comment => `
+                    <div class="comment-item">
+                        <div class="comment-name">
+                            <i data-lucide="user" style="width: 14px;"></i>
+                            ${escapeHtml(comment.name)}
+                        </div>
+                        <div class="comment-text">${escapeHtml(comment.text)}</div>
+                        <div class="comment-date">${comment.date || new Date(comment.timestamp).toLocaleString('id-ID')}</div>
+                    </div>
+                `).join('');
+                
+                lucide.createIcons();
+            }, (error) => {
+                console.error("Error loading comments:", error);
+                container.innerHTML = '<div class="empty-comment">Gagal memuat komentar. Coba lagi nanti.</div>';
+            });
+        }
+
+        // Fungsi untuk mengirim komentar ke Firebase
+        window.postComment = async () => {
+            const input = document.getElementById('commentInput');
+            const text = input.value.trim();
+            
+            if (!text) {
+                showToast("Tulis komentar terlebih dahulu!");
+                return;
+            }
+            
+            if (!currentItem) {
+                showToast("Tema tidak ditemukan!");
+                return;
+            }
+            
+            // Generate nama random atau bisa pakai input nama nanti
+            const randomNum = Math.floor(Math.random() * 10000);
+            const name = "User_" + randomNum;
+            
+            // Buat komentar object
+            const comment = {
+                name: name,
+                text: text,
+                timestamp: Date.now(),
+                date: new Date().toLocaleString('id-ID', { 
+                    day: 'numeric', 
+                    month: 'short', 
+                    year: 'numeric', 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                })
+            };
+            
+            try {
+                // Simpan ke Firebase di path comments/{themeId}
+                const commentsRef = ref(db, `comments/${currentItem.id}`);
+                const newCommentRef = push(commentsRef);
+                await set(newCommentRef, comment);
+                
+                input.value = '';
+                showToast("Komentar terkirim!");
+                
+            } catch (error) {
+                console.error("Error posting comment:", error);
+                showToast("Gagal mengirim komentar. Coba lagi.");
+            }
+        };
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Firebase listener untuk data tema
         onValue(ref(db, 'apps/'), (snapshot) => {
             const data = snapshot.val();
             if (data) {
-                // Filter data: hanya yang bukan APK, lalu mapping ke array dengan likes
                 allData = Object.keys(data).filter(key => !data[key].is_apk).map(key => ({ 
                     id: key, ...data[key], likes: data[key].likes || 0
                 }));
-                refreshView(); // Refresh tampilan setelah data baru
+                refreshView();
             }
         });
 
-        // Fungsi untuk refresh tampilan sesuai halaman aktif
         function refreshView() {
             const activeView = document.querySelector('.view.active').id;
             if(activeView === 'view-home') renderItems(allData, 'mainGrid');
@@ -311,7 +489,6 @@
             if(activeView === 'view-fav') renderItems(allData.filter(i => favorites.includes(i.id)), 'favGrid');
         }
 
-        // Render item ke grid tertentu
         function renderItems(items, gridId) {
             const grid = document.getElementById(gridId);
             if (!grid) return;
@@ -329,10 +506,9 @@
                 `;
                 grid.appendChild(div);
             });
-            lucide.createIcons(); // refresh icon setelah render
+            lucide.createIcons();
         }
 
-        // Fungsi global: pindah antar view (home, browse, fav, settings)
         window.switchView = (viewName, el) => {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.dock-item').forEach(d => d.classList.remove('active'));
@@ -342,7 +518,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
-        // Membuka detail panel untuk tema tertentu
         window.openDetail = (item) => {
             currentItem = item;
             document.getElementById('detTitle').innerText = item.name;
@@ -351,34 +526,37 @@
             document.getElementById('detSize').innerText = item.size || '3.5 MB';
             document.getElementById('detDesc').innerText = item.desc || "Berikan tampilan baru pada smartphone Anda dengan desain premium ini.";
             
-            // Render galeri gambar
             const gallery = document.getElementById('detGallery');
             gallery.innerHTML = '';
             (item.images || []).forEach(img => {
                 gallery.innerHTML += `<div class="gallery-item"><img src="${img}"></div>`;
             });
 
-            // Set tombol like sesuai status liked
             document.getElementById('detLikeBtn').style.color = likedItems.includes(item.id) ? 'var(--heart)' : 'var(--text)';
             document.getElementById('detLikeBtn').onclick = () => handleLike(item.id);
 
-            // Event tombol unduh
             document.getElementById('installBtn').onclick = () => {
                 showToast("Membuka tautan unduhan...");
                 setTimeout(() => window.open(item.link, '_blank'), 600);
             };
 
+            // Load komentar dari Firebase untuk tema ini
+            loadComments(item.id);
+
             document.getElementById('detailPanel').classList.add('active');
             document.getElementById('mainDock').style.transform = 'translateY(150%)';
         };
 
-        // Menutup detail panel
         window.closeDetail = () => {
+            // Hentikan listener komentar saat panel ditutup
+            if (currentCommentListener) {
+                currentCommentListener();
+                currentCommentListener = null;
+            }
             document.getElementById('detailPanel').classList.remove('active');
             document.getElementById('mainDock').style.transform = 'translateY(0)';
         };
 
-        // Copy link share (tautan unduhan)
         window.copyShareLink = () => {
             if(!currentItem) return;
             const dummy = document.createElement('input');
@@ -390,12 +568,11 @@
             showToast("Link disalin!");
         };
 
-        // Handle like: menggunakan transaction Firebase agar likes count aman dari race condition
         function handleLike(id) {
             if (likedItems.includes(id)) return;
             runTransaction(ref(db, `apps/${id}/likes`), (c) => (c || 0) + 1).then(() => {
                 likedItems.push(id);
-                if(!favorites.includes(id)) favorites.push(id); // otomatis tambah ke favorit jika like
+                if(!favorites.includes(id)) favorites.push(id);
                 localStorage.setItem('themeX_liked', JSON.stringify(likedItems));
                 localStorage.setItem('themeX_favs', JSON.stringify(favorites));
                 document.getElementById('detLikeBtn').style.color = 'var(--heart)';
@@ -404,34 +581,28 @@
             });
         }
 
-        // Toggle mode gelap/terang
         window.toggleTheme = () => {
             const isDark = document.body.getAttribute('data-theme') === 'dark';
             document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
             lucide.createIcons();
         };
 
-        // Menampilkan toast notifikasi
         window.showToast = (msg) => {
             const t = document.getElementById('toast');
             t.innerText = msg; t.classList.add('active');
             setTimeout(() => t.classList.remove('active'), 2000);
         };
 
-        // Pencarian tema di halaman home
         window.doSearch = () => {
             const term = document.getElementById('searchInput').value.toLowerCase();
             renderItems(allData.filter(i => i.name.toLowerCase().includes(term)), 'mainGrid');
         };
 
-        // Inisialisasi icon lucide
         lucide.createIcons();
     </script>
 
-    <!-- Script guardian (placeholder) -->
     <script id="guardian-v10" data-key="GW-772"></script>
 
-    <!-- Script popup iklan (Ads Go overlay) -->
     <div id="ads-go-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(10px); z-index:999999; justify-content:center; align-items:center; opacity:0; transition: opacity 0.4s ease;">
         <div id="ads-go-box" style="position:relative; width:85%; max-width:360px; background:#fff; border-radius:30px; overflow:hidden; box-shadow:0 25px 50px rgba(0,0,0,0.3); transform:scale(0.85); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
             <button onclick="tutupIklanAdsGo()" style="position:absolute; top:15px; right:15px; width:35px; height:35px; border-radius:50%; border:none; background:rgba(255, 118, 117, 0.9); color:#fff; font-weight:bold; cursor:pointer; z-index:1000001; box-shadow:0 4px 10px rgba(0,0,0,0.2); display:flex; justify-content:center; align-items:center; font-family: sans-serif;">✕</button>
@@ -442,7 +613,6 @@
     </div>
 
     <script>
-        // Ambil data iklan dari JSONBin dan tampilkan overlay jika memenuhi syarat
         (async function() {
             const BIN_ID = "69aba10b43b1c97be9bc6862";
             const MASTER_KEY = "$2a$10$go25lr52o.r3GKWOrNSUiO6Gdv52kcAcNS56vMiiIhlM5yX3X2ON6";
@@ -456,7 +626,6 @@
                 const adsList = result.record;
 
                 if (Array.isArray(adsList)) {
-                    // Cari iklan aktif yang sesuai dengan link_target (atau wildcard "*")
                     const activeAd = adsList.find(ad => 
                         ad.tampilkan === true && 
                         (currentURL.includes(ad.link_target) || ad.link_target === "*")
@@ -484,7 +653,6 @@
             }
         })();
 
-        // Fungsi untuk menutup popup iklan
         function tutupIklanAdsGo() {
             const overlay = document.getElementById('ads-go-overlay');
             overlay.style.opacity = '0';
